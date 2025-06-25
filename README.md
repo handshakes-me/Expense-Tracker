@@ -2,7 +2,9 @@
 
 A simple and intuitive expense tracking application built with Python and Kivy.
 
-![PyBudget Screenshot](screenshot.png)
+![PyBudget Screenshot](assets/screenshot.png)
+
+*Screenshot of the PyBudget application showing the dashboard with transaction history and summary cards.*
 
 ## Features
 
