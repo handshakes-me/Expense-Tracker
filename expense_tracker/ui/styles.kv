@@ -1,0 +1,146 @@
+#:kivy 2.0.0
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+#:import dp kivy.metrics.dp
+
+<Label>:
+    font_name: 'Roboto'
+    color: get_color_from_hex('#264653')        # navy-teal text
+
+<Button>:
+    font_size: '16sp'
+    size_hint_y: None
+    height: dp(48)
+    background_normal: ''
+    background_down: ''
+    canvas.before:
+        # soft drop-shadow
+        Color:
+            rgba: 0, 0, 0, .15
+        RoundedRectangle:
+            pos: (self.x, self.y - dp(2))
+            size: (self.width, self.height)
+            radius: [12]
+        # main button shape
+        Color:
+            rgba: get_color_from_hex('#2A9D8F') if self.state=='normal' else get_color_from_hex('#247880')
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [12]
+    color: 1, 1, 1, 1                     # white label
+
+<TextInput>:
+    background_normal: ''
+    background_active: ''
+    padding: [dp(16), dp(16)]
+    multiline: False
+    canvas.before:
+        # subtle shadow
+        Color:
+            rgba: 0, 0, 0, .1
+        RoundedRectangle:
+            pos: (self.x, self.y - dp(1))
+            size: self.size
+            radius: [10]
+        # white card
+        Color:
+            rgba: 1, 1, 1, 1
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [10]
+        # accent border
+        Color:
+            rgba: get_color_from_hex('#BFD7EA')
+        Line:
+            rounded_rectangle: (self.x, self.y, self.width, self.height, 10)
+            width: 1.2
+    foreground_color: get_color_from_hex('#0B3954')  # dark-teal input text
+
+<Spinner>:
+    background_normal: ''
+    background_down: ''
+    size_hint_y: None
+    height: dp(48)
+    canvas.before:
+        Color:
+            rgba: 0, 0, 0, .15
+        RoundedRectangle:
+            pos: (self.x, self.y - dp(2))
+            size: self.size
+            radius: [10]
+        Color:
+            rgba: 1, 1, 1, 1
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [10]
+        Color:
+            rgba: get_color_from_hex('#FF6663')
+        Line:
+            rounded_rectangle: (self.x, self.y, self.width, self.height, 10)
+            width: 1
+    color: get_color_from_hex('#264653')
+
+<SpinnerOption>:
+    background_normal: ''
+    background_down: ''
+    canvas.before:
+        Color:
+            rgba: get_color_from_hex('#E0E1DD') if self.state=='normal' else get_color_from_hex('#0B3954')
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    color: get_color_from_hex('#264653')
+
+<Popup>:
+    background: ''
+    separator_color: get_color_from_hex('#BFD7EA')
+    title_color: get_color_from_hex('#264653')
+    canvas.before:
+        Color:
+            rgba: 0, 0, 0, .6        # dim overlay
+        Rectangle:
+            pos: self.pos
+            size: self.size
+        Color:
+            rgba: 1, 1, 1, 1        # white popup card
+        RoundedRectangle:
+            pos: (self.x + dp(20), self.y + dp(20))
+            size: (self.width - dp(40), self.height - dp(40))
+            radius: [15]
+
+<Popup@Popup>:
+    title_size: '20sp'
+    title_align: 'center'
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: dp(10)
+        padding: dp(15)
+        Label:
+            id: content_label
+            text: root.content.text if hasattr(root, 'content') else ''
+            color: get_color_from_hex('#264653')
+            text_size: self.width, None
+            size_hint_y: None
+            height: self.texture_size[1]
+        Button:
+            text: 'OK'
+            size_hint_y: None
+            height: dp(48)
+            background_normal: ''
+            background_down: ''
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 0, .15
+                RoundedRectangle:
+                    pos: (self.x, self.y - dp(2))
+                    size: (self.width, self.height)
+                    radius: [12]
+                Color:
+                    rgba: get_color_from_hex('#FF6663') if self.state=='normal' else get_color_from_hex('#E05450')
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [12]
+            color: 1, 1, 1, 1
